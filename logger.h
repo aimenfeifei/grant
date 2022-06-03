@@ -12,43 +12,51 @@ public:
     int line;
     std::string msg;
 };
-
+ 
+    
 class GFormatter
 {
 public:
-    std::shared_ptr<GFormatter> ptr;
-
+    typedef std::shared_ptr<GFormatter> ptr;
 };
 
 
 class GAppender
 {
 public:
-    std::shared_ptr<GAppender> ptr;
+    typedef std::shared_ptr<GAppender> ptr;
+
 };
 
 class GStdAppender
 {
 public:
-    std::shared_ptr<GStdAppender> ptr;
+    typedef std::shared_ptr<GStdAppender> ptr;
 };
 
 class GFileAppender
 {
 public:
-    std::shared_ptr<GFileAppender> ptr;
+   typedef std::shared_ptr<GFileAppender> ptr;
 };
 
 
-class GRANTAPI GLogger
+class GLogger
 {
 public:
-    std::shared_ptr<GLogger> ptr;
+    typedef std::shared_ptr<GLogger> ptr;
+
+    GLogger();
+    ~GLogger();
+
+private:
 
 };
 
+class GLoggerManager
+{
 
-
+};
 
 
 }
