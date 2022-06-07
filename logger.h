@@ -41,6 +41,8 @@ class GFormatter
 {
 public:
     typedef std::shared_ptr<GFormatter> ptr;
+private:
+    
 };
 
 
@@ -73,8 +75,9 @@ public:
     ~GLogger();
 
 private:
+         
+    GLogger *root; 
     std::list<GAppender::ptr> appenders;
-    
 };
 
 class GLoggerManager
