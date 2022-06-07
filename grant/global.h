@@ -7,7 +7,7 @@
 #include <memory>
 #include <map>
 #include <algorithm>
-
+#include <list>
 
 #if defined (GRANT)
 # define GRANTAPI __declspec(dllexport)

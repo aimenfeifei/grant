@@ -2,7 +2,8 @@
 #define _G_LOGGER_H_
 
 #include "global.h"
-#include <stringstream>
+#include <sstream>
+#include <memory>
 
 namespace grant{
 
@@ -27,6 +28,9 @@ struct GLogLevel
 class GLogEvent
 {
 public:
+    typedef std::shared_ptr<GLogEvent> ptr;
+
+private:
     const char* file = nullptr;        // 文件名 
     int line;                          // 行号
     int threadid;
@@ -41,6 +45,10 @@ class GFormatter
 {
 public:
     typedef std::shared_ptr<GFormatter> ptr;
+<<<<<<< HEAD:logger.h
+=======
+
+>>>>>>> 7dbc706c916819c1e7b0bc2917dc8ef6b310bfc1:grant/logger.h
 private:
     
 };
@@ -51,6 +59,8 @@ class GAppender
 public:
     typedef std::shared_ptr<GAppender> ptr;
 
+protected:
+    GFormatter::ptr formatter;
 };
 
 class GStdAppender
@@ -70,13 +80,36 @@ class GLogger
 {
 public:
     typedef std::shared_ptr<GLogger> ptr;
+    GLogger(const std::string& name = "root");
 
-    GLogger();
-    ~GLogger();
+    void log(GLogLevel::Level, GLogEvent::ptr event);
+    void trace(GLogEvent::ptr event);
+    void debug(GLogEvent::ptr event);
+    void info(GLogEvent::ptr event);
+    void warning(GLogEvent::ptr event);
+    void error(GLogEvent::ptr event);
+    void fatal(GLogEvent::ptr event);
+
+    std::string getName() const {return name;}
+
+    void setLevel(GLogLevel::Level level);
+    GLogLevel::Level getLevel();
+    void addAppender(GAppender::ptr appender);
+    void delAppender(GAppender::ptr appender);
+    void clearAppender();
+    void setFormatter(GFormatter::ptr formatter);
+    void setFormatter(const std::string& pattern);
 
 private:
+<<<<<<< HEAD:logger.h
          
     GLogger *root; 
+=======
+    GLogger::ptr root;
+    std::string name;
+    GLogLevel::Level level;
+    GFormatter::ptr formatter;
+>>>>>>> 7dbc706c916819c1e7b0bc2917dc8ef6b310bfc1:grant/logger.h
     std::list<GAppender::ptr> appenders;
 };
 
